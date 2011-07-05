@@ -1,5 +1,6 @@
 project/boot/
 project/build/target/
+project/plugins/project
 target/
 *_managed/
 *.tmproj
