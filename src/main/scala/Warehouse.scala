@@ -21,7 +21,7 @@ class Order(product: String, quantity: Int) {
   def fill() {
     if (Warehouse.hasInventory(product, quantity)) {
       Warehouse.remove(product, quantity)
-      filled = false
+      filled = true
     }
   }
 }
