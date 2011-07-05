@@ -11,9 +11,5 @@ object Warehouse {
   def remove(product: String, quantity: Int) = 
     products += (product -> (inStock(product) - quantity))
   
-  def inStock(product: String) =
-    products.get(product) match {
-      case Some(quantity) => quantity
-      case None => 0
-    }
+  def inStock(product: String) = products.getOrElse(product, 0)
 }
