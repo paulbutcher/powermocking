@@ -19,10 +19,36 @@ class WarehouseTest extends WordSpec with MockFactory with GeneratedMockFactory 
           mockWarehouse.expects.remove("Talisker", 50) once
         }
         
-        val order = new Order("Talisker", 50)
+        val order = Order("Talisker", 50)
         order.fill
         
         assert(order.filled)
+      }
+    }
+    
+    "not in stock" should {
+      "remove nothing" in {
+        val mockWarehouse = mockObject(Warehouse)
+        mockWarehouse.expects.hasInventory(*, *) returning false once
+        
+        val order = Order("Talisker", 50)
+        order.fill
+        
+        assert(!order.filled)
+      }
+    }
+    
+    "as large as possible" should {
+      "consume all inventory" in {
+        val mockWarehouse = mockObject(Warehouse)
+        val mockOrder = mock[Order]
+        
+        inSequence {
+          mockWarehouse.expects.inStock("Laphroig") returning 10
+          mockOrder.expects.newInstance("Laphroig", 10)
+        }
+        
+        Order.largestPossible("Laphroig")
       }
     }
   }
