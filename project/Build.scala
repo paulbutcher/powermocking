@@ -11,9 +11,7 @@ object PowerMockingBuild extends Build {
     scalacOptions ++= Seq("-deprecation", "-unchecked", "-Xfatal-warnings"),
 
     resolvers += ScalaToolsSnapshots,
-    libraryDependencies ++= Seq(
-      "com.borachio" %% "borachio-core" % "2.0-SNAPSHOT", 
-      "com.borachio" %% "borachio-scalatest-support" % "2.0-SNAPSHOT"),
+    libraryDependencies += "com.borachio" %% "borachio-scalatest-support" % "2.0-SNAPSHOT",
     autoCompilerPlugins := true,
     addCompilerPlugin("com.borachio" %% "borachio-compiler-plugin" % "2.0-SNAPSHOT"))
     
